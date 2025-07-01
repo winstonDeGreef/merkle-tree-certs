@@ -521,7 +521,7 @@ An issuance log describes an append-only sequence of *entries* ({{log-entries}})
 
 Issuance logs have an interface for the log operator, i.e. the CA, to add entries. Unlike {{?RFC6962}} and {{?RFC9162}}, this interface is not publicly accessible. The log only contains entries which the log operator themselves has chosen to add. As entries are added, the Merkle Tree is updated to be computed over the new sequence.
 
-A snapshot of the log is known as a *checkpoint*. A checkpoint is identified by its *tree size*, that is the number of elements comitted to the log at the time. Its contents can be described by the Merkle Tree Hash ({{Section 2.1.1 of !RFC9162}}) of entries zero through `tree_size - 1`.
+A snapshot of the log is known as a *checkpoint*. A checkpoint is identified by its *tree size*, or the number of elements in the log at the time. Its contents can be described by the Merkle Tree Hash ({{Section 2.1.1 of !RFC9162}}) of entries zero through `tree_size - 1`.
 
 Cosigners ({{cosigners}}) sign assertions about the state of the issuance log. A Merkle Tree CA operates a combination of an issuance log and one or more CA cosigners ({{certification-authority-cosigners}}) that authenticate the log state and certifies the contents. External cosigners may also be deployed to assert correct log operation or provide other services to relying parties ({{trusted-cosigners}}).
 
@@ -542,7 +542,7 @@ Each issuance log is identified by a *log ID*, which is a trust anchor ID {{!I-D
 An issuance log's log ID determines an X.509 distinguished name ({{Section 4.1.2.4 of !RFC5280}}). The distinguished name has a single relative distinguished name, which has a single attribute. The attribute has type `id-rdna-trustAnchorID`, defined below:
 
 ~~~
-id-rdna-trustAnchorID OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 TBD1 TBD2}
+id-rdna-trustAnchorID OBJECT IDENTIFIER ::= {iso(1) identified-organization(3) dod(6) internet(1) security(5) mechanisms(5) pkix(7) TBD1 TBD2}
 ~~~
 
 [[TODO: Fill in TBD1 from the PKIX rdna arc in {{!I-D.draft-ietf-lamps-x509-alg-none}}, once allocated.]]
@@ -783,7 +783,7 @@ The TBSCertificate's `subjectPublicKeyInfo` contains the specified public key. I
 The TBSCertificate's `signature` and the Certificate's `signatureAlgorithm` MUST contain an AlgorithmIdentifier whose `algorithm` is id-alg-mtcProof, defined below, and whose `parameters` is omitted.
 
 ~~~
-id-alg-mtcProof OBJECT IDENTIFIER ::= {1 3 6 1 5 5 7 6 TBD}
+id-alg-mtcProof OBJECT IDENTIFIER ::= {iso(1) identified-organization(3) dod(6) internet(1) security(5) mechanisms(5) pkix(7) algorithms(6) TBD}
 ~~~
 
 For initial experimentation, early implementations of this design will use the OID 1.3.6.1.4.1.44363.47.0 instead of `id-alg-mtcProof`.
